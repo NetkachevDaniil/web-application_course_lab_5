@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}ЛР5 - Вход{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4">Вход</h1>
+        <form method="post" class="mt-3">
+            <div class="mb-3">
+                <label class="form-label" for="username">Логин</label>
+                <input class="form-control" type="text" id="username" name="username" value="{{ entered_username }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Пароль</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="remember_me" name="remember_me">
+                <label class="form-check-label" for="remember_me">Запомнить меня</label>
+            </div>
+            <button class="btn btn-primary">Войти</button>
+        </form>
+        <p class="text-muted small mt-3 mb-0">Администратор: admin / Admin123! | Пользователь: user01 / User123!</p>
+    </div>
+</div>
+{% endblock %}

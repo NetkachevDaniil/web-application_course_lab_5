@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}ЛР5 - Отчет по страницам{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4">Отчет по страницам</h1>
+        <div class="table-responsive mt-3">
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Страница</th>
+                    <th>Количество посещений</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for path, total in rows %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ path }}</td>
+                        <td>{{ total }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3" class="text-muted">Нет данных.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-success" href="{{ url_for('reports.pages_report_export') }}">Экспорт в CSV</a>
+    </div>
+</div>
+{% endblock %}

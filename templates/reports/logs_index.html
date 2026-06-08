@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}ЛР5 - Журнал посещений{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4">Журнал посещений</h1>
+        <div class="mb-3">
+            <a href="{{ url_for('reports.pages_report') }}" class="btn btn-outline-primary btn-sm">Отчет по страницам</a>
+            <a href="{{ url_for('reports.users_report') }}" class="btn btn-outline-primary btn-sm">Отчет по пользователям</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Пользователь</th>
+                    <th>Страница</th>
+                    <th>Дата</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for log in pagination.items %}
+                    <tr>
+                        <td>{{ loop.index + (pagination.page - 1) * pagination.per_page }}</td>
+                        <td>{{ log.user.full_name if log.user else "Неаутентифицированный пользователь" }}</td>
+                        <td>{{ log.path }}</td>
+                        <td>{{ log.created_at.strftime("%d.%m.%Y %H:%M:%S") }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-muted">Записей пока нет.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <nav>
+            <ul class="pagination">
+                {% if pagination.has_prev %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('reports.logs_index', page=pagination.prev_num) }}">Назад</a></li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">Страница {{ pagination.page }} / {{ pagination.pages or 1 }}</span></li>
+                {% if pagination.has_next %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('reports.logs_index', page=pagination.next_num) }}">Вперёд</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

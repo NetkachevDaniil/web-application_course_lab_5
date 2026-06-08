@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% from "_user_form.html" import user_form %}
+{% block title %}ЛР5 - Редактирование{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4">Редактирование пользователя: {{ user.full_name }}</h1>
+        {{ user_form(url_for('user_edit', user_id=user.id), roles, errors, form_values, True, not is_admin()) }}
+    </div>
+</div>
+{% endblock %}
